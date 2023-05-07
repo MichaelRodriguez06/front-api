@@ -1,0 +1,24 @@
+<div mat-dialog-title>
+  <h1>Formulario de registro</h1>
+</div>
+
+<div mat-dialog-content class="container">
+  <form [formGroup]="cliForm" (ngSubmit)="onFormSubmit()">
+    <mat-form-field>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput type="text" formControlName="nombre" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Precio</mat-label>
+          <input matInput type="number" formControlName="price" />
+        </mat-form-field>
+      </div>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="action">
+  <button mat-raised-button [mat-dialog-close]="false" >Cancelar</button>
+  <button mat-raised-button (click)="onFormSubmit()" type="submit" color="primary">{{data ? 'Actualizar': 'Guardar' }}</button>
+</div>
