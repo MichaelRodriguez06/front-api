@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ToolbarOverviewExample } from './components/toolbar/toolbar.component';
 import { TablaClientesComponent } from './components/tabla-clientes/tabla-clientes.component';
 import { MatButtonModule } from '@angular/material/button';
-import { ClienteAddEditComponent } from './components/cliente-add-edit/cliente-add-edit.component';
+import { AirflightAddEditComponent } from './components/cliente-add-edit/cliente-add-edit.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -25,7 +25,7 @@ import { MatSortModule } from '@angular/material/sort';
     AppComponent,
     ToolbarOverviewExample,
     TablaClientesComponent,
-    ClienteAddEditComponent,
+    AirflightAddEditComponent,
   ],
   imports: [
     BrowserModule,

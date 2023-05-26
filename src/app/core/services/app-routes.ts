@@ -1,5 +1,6 @@
 export abstract class AppRoutes {
-    static readonly GET_LIST_CLIENTS = "clientes/get_clientes";
-    static readonly POST_CLIENT = "clientes/save_cliente";
-    static readonly PUT_CLIENTE = "clientes";
+  static readonly GET_AIRFLIGHT = "AirFlight";
+  static readonly POST_CLIENT = "productos";
+  static readonly PUT_CLIENTE = "productos";
+  
 }

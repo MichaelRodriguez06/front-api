@@ -3,22 +3,39 @@
 </div>
 
 <div mat-dialog-content class="container">
-  <form [formGroup]="cliForm" (ngSubmit)="onFormSubmit()">
+  <form [formGroup]="formParent" (ngSubmit)="onFormSubmit()">
     <mat-form-field>
       <div class="row">
         <mat-form-field appearance="outline">
           <mat-label>Nombre</mat-label>
-          <input matInput type="text" formControlName="nombre" />
+          <input matInput placeholder="Ingrese su nombre" type="text" formControlName="nombre" />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Precio</mat-label>
-          <input matInput type="number" formControlName="price" />
+          <input matInput type="number" formControlName="precio" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Precio</mat-label>
+          <input matInput type="number" formControlName="precio" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Precio</mat-label>
+          <input matInput type="number" formControlName="precio" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Precio</mat-label>
+          <input matInput type="number" formControlName="precio" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Precio</mat-label>
+          <input matInput type="number" formControlName="precio" />
         </mat-form-field>
       </div>
     </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions class="action">
-  <button mat-raised-button [mat-dialog-close]="false" >Cancelar</button>
-  <button mat-raised-button (click)="onFormSubmit()" type="submit" color="primary">{{data ? 'Actualizar': 'Guardar' }}</button>
+  <button mat-raised-button [mat-dialog-close]="false">Cancelar</button>
+  <button mat-raised-button (click)="onFormSubmit()" type="submit" color="primary">{{data ? 'Actualizar': 'Guardar'
+    }}</button>
 </div>

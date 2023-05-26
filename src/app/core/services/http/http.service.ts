@@ -1,64 +1,64 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { environment } from "src/environments/environment";
-import { HttpApiResponse } from "../../models/http-api-response";
+import {Injectable} from "@angular/core";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {environment} from "src/environments/environment";
+import {HttpApiResponse} from "../../models/http-api-response";
 
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 }
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 
-export class HttpServices<T>{
+export class HttpServices<T> {
 
-    url = environment.apiUrl;
+  url = environment.apiUrl;
 
-    constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {
 
-    }
+  }
 
-    get(path: string, params: HttpParams = new HttpParams()): Observable<HttpApiResponse<T>> {
-        return this.http.get<HttpApiResponse<T>>(`${this.url}/${path}`, { params });
-    }
+  get(path: string, params: HttpParams = new HttpParams()): Observable<HttpApiResponse<T>> {
+    return this.http.get<HttpApiResponse<T>>(`${this.url}/${path}`, {params});
+  }
 
-    getList(path: string, params: HttpParams = new HttpParams()): Observable<HttpApiResponse<T[]>> {
-        return this.http.get<HttpApiResponse<T[]>>(`${this.url}/${path}`, { params });
-    }
+  getList(path: string, params: HttpParams = new HttpParams()): Observable<HttpApiResponse<T[]>> {
+    return this.http.get<HttpApiResponse<T[]>>(`${this.url}/${path}`, {params});
+  }
 
-    put(id: number, data: any): Observable<any> {
-        return this.http.put(`https://localhost:7068/clientes/${id}`, data)
-    }
+  put(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.url}/AirFlight`, data);
+  }
 
-    post(path: string, body: Object = {}, options = httpOptions): Observable<HttpApiResponse<T>> {
-        return this.http.post<HttpApiResponse<T>>(
-            `${this.url}/${path}`,
-            JSON.stringify(body),
-            options
-        );
-    }
+  post(path: string, body: Object = {}, options = httpOptions): Observable<HttpApiResponse<T>> {
+    return this.http.post<HttpApiResponse<T>>(
+      `${this.url}/${path}`,
+      JSON.stringify(body),
+      options
+    );
+  }
 
-    patch(path: string, body: Object = {}): Observable<HttpApiResponse<T>> {
-        return this.http.patch<HttpApiResponse<T>>(
-            `${this.url}/${path}`,
-            JSON.stringify(body)
-        )
-    }
+  patch(path: string, body: Object = {}): Observable<HttpApiResponse<T>> {
+    return this.http.patch<HttpApiResponse<T>>(
+      `${this.url}/${path}`,
+      JSON.stringify(body)
+    )
+  }
 
-    delete(id: number): Observable<any> {
-        return this.http.delete(`https://localhost:7068/clientes/${id}`)
-    }
+  delete(id: string): Observable<any> {
+    return this.http.delete(`${this.url}/${id}`)
+  }
 
-    postFile(path: string, form: Object = {}): Observable<HttpApiResponse<T>> {
-        return this.http.post<HttpApiResponse<T>>(
-            `${this.url}/${path}`,
-            form,
-            {
-                reportProgress: true
-            }
-        )
-    }
+  postFile(path: string, form: Object = {}): Observable<HttpApiResponse<T>> {
+    return this.http.post<HttpApiResponse<T>>(
+      `${this.url}/${path}`,
+      form,
+      {
+        reportProgress: true
+      }
+    )
+  }
 }

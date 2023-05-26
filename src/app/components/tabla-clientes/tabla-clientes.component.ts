@@ -1,12 +1,14 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { ClientesService } from 'src/app/services/clientes/clientes.service';
-import { Cliente } from 'src/app/models/cliente';
+import { AirplaneFlightService } from 'src/app/services/clientes/airplane-flight.service';
+import { Airflight } from 'src/app/models/airflight';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { ClienteAddEditComponent } from '../cliente-add-edit/cliente-add-edit.component';
+import { AirflightAddEditComponent } from '../cliente-add-edit/cliente-add-edit.component';
 import { MatSort } from '@angular/material/sort';
 import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
+
+
 
 export interface ClienteItems {
   Id: number;
@@ -19,10 +21,9 @@ export interface ClienteItems {
 
 const COLUMS_SCHEMA = [
   { field: 'Id', header: 'Id' },
-  { field: 'Nombre', header: 'Nombre' },
-  { field: 'Apellido', header: 'Apellido' },
-  { field: 'Direccion', header: 'Celular' },
-  { field: 'Fecha', header: 'Direccion' },
+  { field: 'sId', header: 'sId' },
+  { field: 'Nombre', header: 'nombre' },
+  { field: 'precio', header: 'precio' },
   { field: 'Opciones' },
 ];
 
@@ -34,15 +35,16 @@ const COLUMS_SCHEMA = [
 export class TablaClientesComponent implements OnInit, AfterViewInit {
   public loading: boolean = true;
   columsSchema = COLUMS_SCHEMA;
-  clientList: Cliente[] = [];
+  clientList: Airflight[] = [];
   dataSource: any;
   displayedColumns: string[] = [
     'Nombre',
-    'Apellido',
-    'Celular',
-    'Direccion',
-    'Fechanacimiento',
-    'Options',
+    'Email',
+    'Clase de tiquete',
+    
+    'Telefono',
+    
+    'Opciones',
   ];
 
   cargando: boolean = false;
@@ -50,20 +52,19 @@ export class TablaClientesComponent implements OnInit, AfterViewInit {
 
   constructor(
     private matDialog: MatDialog,
-    private clientService: ClientesService
+    private airplaneFlightService: AirplaneFlightService
   ) {
     this.getListClientes();
   }
 
   getListClientes() {
     this.cargando = true;
-    this.clientService.getClientes().subscribe({
+    this.airplaneFlightService.getListAirplaneFlight().subscribe({
       next: (data) => {
         this.cargando = false;
         this.clientList = data.data;
-        console.log(data);
-
         this.dataSource = data;
+        console.log(data);
       },
       error: (error) => {
         console.log(error);
@@ -81,7 +82,16 @@ export class TablaClientesComponent implements OnInit, AfterViewInit {
   }
 
   openAddEditClient() {
-    const dialogRef = this.matDialog.open(ClienteAddEditComponent);
+    const dialogRef = this.matDialog.open(AirflightAddEditComponent);
+    this.airplaneFlightService.getAirplaneFlight("HolaMUNNDOOOOO").subscribe({
+      next: (data) => {
+        console.log(data.data)
+        
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
     dialogRef.afterClosed().subscribe({
       next: (vale) => {
         if (vale) {
@@ -92,7 +102,7 @@ export class TablaClientesComponent implements OnInit, AfterViewInit {
   }
 
   openEditForm(data: any) {
-    this.matDialog.open(ClienteAddEditComponent, {
+    this.matDialog.open(AirflightAddEditComponent, {
       data,
     });
   }
@@ -102,11 +112,12 @@ export class TablaClientesComponent implements OnInit, AfterViewInit {
     // this.dataSource.paginator = this.paginator;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
-  deleteCliente(id: number) {
+  deleteCliente(id: string) {
     console.log(id);
-    this.clientService.deleteCliente(id).subscribe({
+    this.airplaneFlightService.deleteAirplaneFlight(id).subscribe({
       next: (data) => {
         alert('Empleado borrado correctamente');
         this.getListClientes();
@@ -117,9 +128,10 @@ export class TablaClientesComponent implements OnInit, AfterViewInit {
     });
   }
 
-  createClient() {}
+  createClient() {
+  }
 
-  getStatusName(cliente: Cliente) {
+  getStatusName(cliente: Airflight) {
     return 'FULL';
   }
 }

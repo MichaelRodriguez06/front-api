@@ -8,22 +8,27 @@ import { Airflight } from 'src/app/models/airflight';
 @Injectable({
   providedIn: 'root',
 })
-export class AirfightService {
-  constructor(private server: HttpServices<Airflight>) {}
-
-  getAirflights(): Observable<HttpApiResponse<Airflight[]>> {
-    return this.server.getList(AppRoutes.GET_LIST_CLIENTS);
+export class AirplaneFlightService {
+  constructor(private server: HttpServices<Airflight>) {
   }
 
-  postCliente(newClient: Airflight) {
+  getListAirplaneFlight(): Observable<HttpApiResponse<Airflight[]>> {
+    return this.server.getList(AppRoutes.GET_AIRFLIGHT);
+  }
+
+  getAirplaneFlight(id: string): Observable<HttpApiResponse<Airflight>> {
+    return this.server.get(AppRoutes.GET_AIRFLIGHT + '/' + id);
+  }
+
+  postAirplaneFlight(newClient: Airflight) {
     return this.server.post(AppRoutes.POST_CLIENT, newClient);
   }
 
-  deleteCliente(id: number) {
+  deleteAirplaneFlight(id: string) {
     return this.server.delete(id);
   }
 
-  putCliente(id: number, data: any) {
+  putAirplaneFlight(id: number, data: any) {
     return this.server.put(id, data);
   }
 }

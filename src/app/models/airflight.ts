@@ -1,4 +1,4 @@
-export interface Cliente {
+export interface Airflight {
     id: string,
     sId: string,
     nombre: string,
