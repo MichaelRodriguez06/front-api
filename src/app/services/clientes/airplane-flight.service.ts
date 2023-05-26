@@ -3,19 +3,19 @@ import { Observable } from 'rxjs';
 import { HttpApiResponse } from 'src/app/core/models/http-api-response';
 import { AppRoutes } from 'src/app/core/services/app-routes';
 import { HttpServices } from 'src/app/core/services/http/http.service';
-import { Cliente } from 'src/app/models/cliente';
+import { Airflight } from 'src/app/models/airflight';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ClientesService {
-  constructor(private server: HttpServices<Cliente>) {}
+export class AirfightService {
+  constructor(private server: HttpServices<Airflight>) {}
 
-  getClientes(): Observable<HttpApiResponse<Cliente[]>> {
+  getAirflights(): Observable<HttpApiResponse<Airflight[]>> {
     return this.server.getList(AppRoutes.GET_LIST_CLIENTS);
   }
 
-  postCliente(newClient: Cliente) {
+  postCliente(newClient: Airflight) {
     return this.server.post(AppRoutes.POST_CLIENT, newClient);
   }
 

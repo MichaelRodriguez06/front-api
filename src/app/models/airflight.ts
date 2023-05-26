@@ -1,6 +1,5 @@
 export interface Cliente {
-
-    Id: number,
+    id: string,
     sId: string,
     nombre: string,
     precio: number,
