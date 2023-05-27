@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AirflightAddEditComponent } from '../cliente-add-edit/cliente-add-edit.component';
 import { MatSort } from '@angular/material/sort';
 import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
+import { Form, FormGroup } from '@angular/forms';
 
 
 
@@ -54,10 +55,10 @@ export class TablaClientesComponent implements OnInit, AfterViewInit {
     private matDialog: MatDialog,
     private airplaneFlightService: AirplaneFlightService
   ) {
-    this.getListClientes();
+    this.getListAirplaneflights();
   }
 
-  getListClientes() {
+  getListAirplaneflights() {
     this.cargando = true;
     this.airplaneFlightService.getListAirplaneFlight().subscribe({
       next: (data) => {
@@ -83,7 +84,7 @@ export class TablaClientesComponent implements OnInit, AfterViewInit {
 
   openAddEditClient() {
     const dialogRef = this.matDialog.open(AirflightAddEditComponent);
-    this.airplaneFlightService.getAirplaneFlight("HolaMUNNDOOOOO").subscribe({
+    this.airplaneFlightService.getAirplaneFlight('hj').subscribe({
       next: (data) => {
         console.log(data.data)
         
@@ -95,16 +96,39 @@ export class TablaClientesComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe({
       next: (vale) => {
         if (vale) {
-          this.getListClientes();
+          this.getListAirplaneflights();
         }
       },
     });
   }
 
-  openEditForm(data: any) {
-    this.matDialog.open(AirflightAddEditComponent, {
-      data,
+  deleteAirplaneFlight(id: string) {
+    console.log(id);
+    this.airplaneFlightService.deleteAirplaneFlight(id).subscribe({
+      next: (data) => {
+        alert('Vuelo borrado correctamente');
+        this.getListAirplaneflights();
+      },
+      error: (error) => {
+        console.log(error);
+      },
     });
+  }
+
+  openEditForm(data: string) {
+    console.log(data);
+    this.airplaneFlightService.getAirplaneFlight(data).subscribe({
+      next: (res) => {
+        console.log(res)
+        this.matDialog.open(AirflightAddEditComponent, res);
+      },
+      error: (error) => {
+        alert('Error al obtener el vuelo');
+      } 
+    });
+    // this.matDialog.open(AirflightAddEditComponent, {
+    //   data,
+    // });
   }
 
   ngAfterViewInit() {
@@ -120,7 +144,7 @@ export class TablaClientesComponent implements OnInit, AfterViewInit {
     this.airplaneFlightService.deleteAirplaneFlight(id).subscribe({
       next: (data) => {
         alert('Empleado borrado correctamente');
-        this.getListClientes();
+        this.getListAirplaneflights();
       },
       error: (error) => {
         console.log(error);

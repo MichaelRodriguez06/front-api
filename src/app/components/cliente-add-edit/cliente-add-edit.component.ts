@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AirplaneFlightService } from 'src/app/services/clientes/airplane-flight.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Company } from 'src/app/models/company';
 
 @Component({
   selector: 'app-cliente-add-edit',
@@ -17,28 +18,28 @@ export class AirflightAddEditComponent implements OnInit {
     private _fb: FormBuilder,
     private clientService: AirplaneFlightService,
     private _dialogRef: MatDialogRef<AirflightAddEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.formParent = _fb.group({
-      nombre: '',
-      precio: '',
-    });
+    @Inject(MAT_DIALOG_DATA) public data: any
+    ) {
+    this.formParent = _fb.group(
+      {
+        _id: new FormControl('', Validators.required),
+        name: new FormControl('', Validators.required),
+        ticketClass: new FormControl('', Validators.required),
+        ticketId: new FormControl('', Validators.required),
+        gender: new FormControl('', Validators.required),
+        email: new FormControl('', Validators.required),
+        phone: new FormControl('', Validators.required),
+        flyDate: new FormControl('', Validators.required),
+        destinyCountry: new FormControl('', Validators.required),
+        planeScale: new FormArray([], [Validators.required]),
+        company: new FormArray([], [Validators.required])
+      }
+    );
   }
 
   ngOnInit(): void {
+    console.log(this.data);
     this.formParent.patchValue(this.data);
-    this.formParent = new FormGroup({
-      _id: new FormControl('', Validators.required),
-      name: new FormControl('', Validators.required),
-      ticketClass: new FormControl('', Validators.required),
-      ticketId: new FormControl('', Validators.required),
-      gender: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required),
-      flyDate: new FormControl('', Validators.required),
-      destinyCountry: new FormControl('', Validators.required),
-      planeScale: new FormArray([], [Validators.required]),
-      company: new FormArray([], [Validators.required])
-    });
   }
 
   addPlaneScale(): void {
@@ -56,6 +57,7 @@ export class AirflightAddEditComponent implements OnInit {
       scale: new FormControl('', Validators.required),
     });
   }
+
   initCompanyForm(): FormGroup {
     return new FormGroup({
       name: new FormControl('', Validators.required),
@@ -66,6 +68,11 @@ export class AirflightAddEditComponent implements OnInit {
   closeDialog() {
     this._dialogRef.close();
   }
+
+  getCtrl(key: string, form: FormGroup): any {
+    return form.get(key)
+  }
+
 
   onFormSubmit() {
     if (this.formParent.valid) {

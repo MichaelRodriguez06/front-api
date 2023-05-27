@@ -49,7 +49,7 @@ export class HttpServices<T> {
   }
 
   delete(id: string): Observable<any> {
-    return this.http.delete(`${this.url}/${id}`)
+    return this.http.delete(`${this.url}/AirFlight/${id}`)
   }
 
   postFile(path: string, form: Object = {}): Observable<HttpApiResponse<T>> {

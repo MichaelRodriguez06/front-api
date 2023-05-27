@@ -8,28 +8,20 @@
       <div class="row">
         <mat-form-field appearance="outline">
           <mat-label>Nombre</mat-label>
-          <input matInput placeholder="Ingrese su nombre" type="text" formControlName="nombre" />
+          <input matInput placeholder="Ingrese su nombre" type="text" formControlName="name" />
         </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Precio</mat-label>
-          <input matInput type="number" formControlName="precio" />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Precio</mat-label>
-          <input matInput type="number" formControlName="precio" />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Precio</mat-label>
-          <input matInput type="number" formControlName="precio" />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Precio</mat-label>
-          <input matInput type="number" formControlName="precio" />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Precio</mat-label>
-          <input matInput type="number" formControlName="precio" />
-        </mat-form-field>
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Clase de tiquete</mat-label>
+            <input matInput type="number" formControlName="ticketClass" />
+          </mat-form-field>
+        </div>
+        <div class="form-grid" formArrayName="planeScale">
+          <div class="form field" *ngFor="let skill of getCtrl('planeScale', formParent).control s;index as formChild">
+
+          </div>
+        </div>
+        <button (click)="addPlaneScale()">Agregar escala</button>
       </div>
     </mat-form-field>
   </form>
